@@ -1,7 +1,8 @@
 from playwright.sync_api import Page, expect
+from config import BASE_URL
 
 def test_login(page: Page):
-    page.goto('http://144.31.139.115:5000/')
+    page.goto(BASE_URL)
     page.get_by_test_id('nav-login').click()
     page.get_by_test_id('login-username').fill('testDataLogin')
     page.get_by_test_id('login-password').fill('testDataPassword')
