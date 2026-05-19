@@ -1,4 +1,4 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 from config import BASE_URL
 from faker import Faker
 
@@ -15,4 +15,24 @@ def test_login(page: Page):
     page.get_by_test_id('login-password').fill(password)
 
     page.get_by_test_id('login-submit').click()
-    expect(page.get_by_text('Invalid login or password.')).to_be_visible()
+
+    loader = page.get_by_test_id('login-submit-spinner')
+    loader.wait_for(state='visible')
+
+    assert loader.is_visible(), (
+        "Expected: loader is visible after submit), "
+        "Actual: loader was not visible"
+    )
+
+    loader.wait_for(state='hidden')
+
+    assert loader.is_hidden(), (
+        "Expected: loader is hidden after request completes, "
+        "Actual: loader is still visible"
+    )
+
+    expected_error = "Invalid login or password."
+    actual_error = page.get_by_test_id('login-error-inline').inner_text()
+
+    assert actual_error == expected_error, \
+    f"Expected '{expected_error}', but got '{actual_error}'"
