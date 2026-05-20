@@ -17,19 +17,9 @@ def test_login(page: Page):
     page.get_by_test_id('login-submit').click()
 
     loader = page.get_by_test_id('login-submit-spinner')
+
     loader.wait_for(state='visible')
-
-    assert loader.is_visible(), (
-        "Expected: loader is visible after submit), "
-        "Actual: loader was not visible"
-    )
-
     loader.wait_for(state='hidden')
-
-    assert loader.is_hidden(), (
-        "Expected: loader is hidden after request completes, "
-        "Actual: loader is still visible"
-    )
 
     expected_error = "Invalid login or password."
     actual_error = page.get_by_test_id('login-error-inline').inner_text()
