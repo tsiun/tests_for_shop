@@ -4,5 +4,4 @@ __pycache__/
 .venv
 venv
 .vscode
-additional_files
 .DS_Store
