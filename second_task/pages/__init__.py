@@ -1,0 +1,2 @@
+from second_task.pages.main_page import MainPage
+from second_task.pages.search_results_page import SearchResultsPage
