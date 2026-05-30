@@ -1,5 +1,5 @@
 from playwright.sync_api import Page
-from search_results_page import SearchResultsPage
+from .search_results_page import SearchResultsPage
 
 class MainPage:
     def __init__(self, page: Page):

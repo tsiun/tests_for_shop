@@ -1,2 +1,2 @@
-from second_task.pages.main_page import MainPage
-from second_task.pages.search_results_page import SearchResultsPage
+from .main_page import MainPage
+from .search_results_page import SearchResultsPage

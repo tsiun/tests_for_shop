@@ -1,2 +1,4 @@
 BASE_URL: 'http://144.31.63.127:5000/'
 browser: 'Chrome'
+headless: true
+timeout: 5000
