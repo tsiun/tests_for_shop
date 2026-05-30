@@ -23,3 +23,4 @@ class SearchResultsPage:
             el = self.prices.nth(i)
             price = int(el.get_attribute('data-price'))
             prices_row.append(price)
+        return prices_row
