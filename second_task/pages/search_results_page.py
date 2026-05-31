@@ -12,6 +12,7 @@ class SearchResultsPage:
     def filter(self, filter_type: str):
         self.filter_sort.select_option(value=filter_type)
         self.apply_button.click()
+        self.wait_for_open()
 
     def wait_for_open(self):
         self.loader.wait_for(state="hidden")
