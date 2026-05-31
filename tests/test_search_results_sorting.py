@@ -1,7 +1,7 @@
 from playwright.sync_api import Page
 import pytest
-from pages import MainPage
-from pages import SearchResultsPage
+from pages.main_page import MainPage
+from pages.search_results_page import SearchResultsPage
 from enum import StrEnum
 from utils.config_reader import ConfigReader
 
