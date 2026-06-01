@@ -3,7 +3,9 @@ import yaml
 class ConfigReader:
     _instance = {}
 
-    def __new__(cls, path: str = 'config.yaml'):
+    config_path = 'config.yaml'
+
+    def __new__(cls, path: str = config_path):
         if path not in cls._instance:
             instance = super().__new__(cls)
             instance._load_config(path)

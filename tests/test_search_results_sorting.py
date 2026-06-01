@@ -21,7 +21,6 @@ class FilterType(StrEnum):
     ]
 )
 
-
 def test_search_result(page: Page, name, n, filter_type):
     page.goto(BASE_URL)
 
