@@ -1,12 +1,10 @@
 import pytest
 from pages.login_page import LoginPage
-from tests.conftest import auth_page
+from tests.conftest import login_page
 
-def test_login(auth_page):
-    login_page = LoginPage(auth_page)
-    login_page.open(auth_page.url)
+def test_login_success(login_page):
 
     expected = "Congratulations! You must have the proper credentials."
-    actual = login_page.get_text_content()
+    actual = LoginPage.success_message.inner_text()
     
     assert actual == expected, f"Expected text: '{expected}', but got: '{actual}'"
