@@ -12,7 +12,6 @@ class BasePage(PageFactory):
     def __init__(self, page, config: dict) -> None:
         self.page = page
         self.config = config
-        self._init_elements()
 
     def open(self) -> None:
         base_url = self.config["base_url"]
