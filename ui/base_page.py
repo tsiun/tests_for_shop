@@ -1,21 +1,22 @@
 from utils.url_utils import embed_credentials_in_url
-from logger import get_logger
-from ui.page_factory import PageFactory
+from logger import setup_logger
+# from ui.page_factory import PageFactory
+from urllib.parse import urljoin
 
-logger = get_logger(__name__)
+logger = setup_logger(__name__)
 
 
-class BasePage(PageFactory):
+class BasePage:
     _path: str = ""
     _requires_basic_auth: bool = False
 
-    def __init__(self, page, config: dict) -> None:
+    def __init__(self, page, config: dict):
         self.page = page
         self.config = config
 
     def open(self) -> None:
         base_url = self.config["base_url"]
-        url = f"{base_url}{self._path}"
+        url = urljoin(base_url, self._path)
 
         if self._requires_basic_auth:
             auth = self.config["basic_auth"]
