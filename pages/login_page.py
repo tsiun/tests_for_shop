@@ -1,5 +1,6 @@
 from ui.base_page import BasePage
+from playwright.sync_api import Page
 
 class LoginPage(BasePage):
-    _path = "/basic_auth"
-    _requires_basic_auth = True
+    def __init__(self, page: Page, config: dict) -> None:
+        super().__init__(page, config)
