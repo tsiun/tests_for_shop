@@ -3,6 +3,8 @@ from playwright.sync_api import sync_playwright
 from examples.page_factory_example import PageFactory
 from logger import setup_logger
 from pages.login_page import LoginPage
+from pages.login_endpoint_page import EndpointPage
+from ui.page_actions import PageActions
 
 @pytest.fixture(scope="session", autouse=True)
 def init_logger():
@@ -35,3 +37,8 @@ def login_page(page, ui_factory):
     page_object.open()
     return page_object
 
+@pytest.fixture
+def endpoint_page(page, ui_factory, login_page) -> EndpointPage:
+    endpoint_page = EndpointPage(page, ui_factory.config)
+    PageActions(page).wait_for_load_state()
+    return endpoint_page
