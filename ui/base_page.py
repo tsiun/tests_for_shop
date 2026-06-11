@@ -5,22 +5,19 @@ from urllib.parse import urljoin
 
 logger = setup_logger(__name__)
 
-
 class BasePage:
-    _path: str = ""
-    _requires_basic_auth: bool = False
 
     def __init__(self, page: Page, config: dict) -> None:
         self.page = page
         self.config = config
 
-    def open(self) -> None:
+    def open(self, path: str="", requires_auth: bool=False) -> None:
         base_url = self.config["base_url"]
-        url = urljoin(base_url, self._path)
+        target_url = urljoin(base_url, path)
 
-        if self._requires_basic_auth:
+        if requires_auth:
             auth = self.config["basic_auth"]
-            url = embed_credentials_in_url(url, auth["username"], auth["password"])
+            target_url = embed_credentials_in_url(target_url, auth["username"], auth["password"])
 
-        logger.info(f"Opening: {url}")
-        self.page.goto(url)
+        logger.info(f"Opening: {target_url}")
+        self.page.goto(target_url)
