@@ -1,6 +1,6 @@
+from playwright.sync_api import Page
 from utils.url_utils import embed_credentials_in_url
 from logger import setup_logger
-# from ui.page_factory import PageFactory
 from urllib.parse import urljoin
 
 logger = setup_logger(__name__)
@@ -10,7 +10,7 @@ class BasePage:
     _path: str = ""
     _requires_basic_auth: bool = False
 
-    def __init__(self, page, config: dict):
+    def __init__(self, page: Page, config: dict) -> None:
         self.page = page
         self.config = config
 
