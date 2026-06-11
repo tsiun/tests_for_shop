@@ -1,5 +1,4 @@
 import pytest
-from pages.login_page import LoginPage
 from pages.login_endpoint_page import EndpointPage
 
 def test_login_success(endpoint_page: EndpointPage) -> None:
