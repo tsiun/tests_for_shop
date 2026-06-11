@@ -34,7 +34,7 @@ def page(ui_factory):
 @pytest.fixture
 def login_page(page, ui_factory):
     page_object = LoginPage(page, config = ui_factory.config)
-    page_object.open()
+    page_object.open('/basic-auth', requires_auth=True)
     return page_object
 
 @pytest.fixture
