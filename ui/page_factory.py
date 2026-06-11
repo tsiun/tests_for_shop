@@ -1,8 +1,7 @@
 import json
-from utils.url_utils import embed_credentials_in_url
-
 
 from playwright.sync_api import Browser, BrowserContext, Page
+
 
 class PageFactory:
     DEFAULT_USER_AGENT = "Steam3TestRunner/1.0"
@@ -21,8 +20,8 @@ class PageFactory:
         self.config = config
 
     @classmethod
-    def from_json(cls, browser: Browser, file_path: str) -> 'PageFactory':
-        with open('config.json', encoding="utf-8") as config_file:
+    def from_json(cls, browser: Browser, file_path: str) -> PageFactory:
+        with open(file_path, encoding="utf-8") as config_file:
             config = json.load(config_file)
         return cls(browser, config)
 
@@ -40,16 +39,8 @@ class PageFactory:
 
     def _create_context(self) -> BrowserContext:
         auth_token = self.config.get("auth_token")
-
-        base_url = self.config["base_url"]
-        username = self.config.get("username")
-        password = self.config.get("password")
-
-        if username and password:
-            base_url = embed_credentials_in_url(base_url, username, password)
-
         context = self.browser.new_context(
-            base_url=base_url,
+            base_url=self.config["base_url"],
             user_agent=self.config.get("user_agent", self.DEFAULT_USER_AGENT),
             viewport=self.config.get("viewport", self.DEFAULT_VIEWPORT),
             locale=self.config.get("locale", self.DEFAULT_LOCALE),
