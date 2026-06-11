@@ -1,10 +1,10 @@
 import pytest
 from pages.login_page import LoginPage
-from tests.conftest import login_page
+from pages.login_endpoint_page import EndpointPage
 
-def test_login_success(login_page):
+def test_login_success(endpoint_page: EndpointPage) -> None:
 
     expected = "Congratulations! You must have the proper credentials."
-    actual = LoginPage.success_message.inner_text()
-    
+    actual = endpoint_page.get_success_message()
+
     assert actual == expected, f"Expected text: '{expected}', but got: '{actual}'"
