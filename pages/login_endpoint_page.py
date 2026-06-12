@@ -6,8 +6,8 @@ class EndpointPage(BasePage):
     def __init__(self, page: Page, config: dict):
         super().__init__(page, config)
         self.success_message = WebElement(
-            locator=self.page.get_by_text("Congratulations! You must have the proper credentials."),
-            description="Popup page -> success message after auth"
+            locator=self.page.locator("#content p"),
+            description="Basic auth page -> paragraph inside content block"
         )
 
     def get_success_message(self) -> str:
