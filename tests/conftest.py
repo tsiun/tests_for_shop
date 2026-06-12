@@ -34,11 +34,10 @@ def page(ui_factory):
 @pytest.fixture
 def login_page(page, ui_factory):
     page_object = LoginPage(page, config = ui_factory.config)
-    page_object.open('/basic-auth', requires_auth=True)
+    page_object.open('/basic_auth', requires_auth=True)
     return page_object
 
 @pytest.fixture
 def endpoint_page(page, ui_factory, login_page) -> EndpointPage:
     endpoint_page = EndpointPage(page, ui_factory.config)
-    PageActions(page).wait_for_load_state()
     return endpoint_page
