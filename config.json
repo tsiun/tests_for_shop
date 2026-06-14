@@ -9,5 +9,10 @@
   "timezone_id": "Europe/Moscow",
   "default_timeout_ms": 10000,
   "navigation_timeout_ms": 15000,
-  "block_analytics": true
+  "block_analytics": true,
+
+  "pages": {
+    "basic_auth": "/basic_auth",
+    "javascript_alerts": "/javascript_alerts"
+  }
 }
