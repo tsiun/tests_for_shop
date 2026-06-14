@@ -1,7 +1,12 @@
 import json
+from logger import setup_logger
+from urllib.parse import urljoin
+from utils.url_utils import embed_credentials_in_url
+from ui.page_actions import PageActions
 
 from playwright.sync_api import Browser, BrowserContext, Page
 
+logger = setup_logger(__name__)
 
 class PageFactory:
     DEFAULT_USER_AGENT = "Steam3TestRunner/1.0"
@@ -79,6 +84,28 @@ class PageFactory:
             context.route("**/*", self._handle_route)
 
         return context
+    
+    def open_page(self, page: Page, page_class, path_key: str, requires_auth: bool=False):
+
+        actions = PageActions(page)
+
+        base_url = self.config["base_url"]
+        relative_path = self.config["pages"].get(path_key, "")
+        target_url = urljoin(base_url, relative_path)
+
+        if requires_auth:
+            auth = self.config["basic_auth"]
+            target_url = embed_credentials_in_url(
+                target_url, 
+                auth["username"], 
+                auth["password"]
+            )
+
+        actions.goto(target_url)
+
+        return page_class(page, self.config)
+
+
 
     @staticmethod
     def _handle_route(route) -> None:
