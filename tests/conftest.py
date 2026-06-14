@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import sync_playwright
-from examples.page_factory_example import PageFactory
+from ui.page_factory import PageFactory
 from logger import setup_logger
 from pages.login_page import LoginPage
 from pages.login_endpoint_page import EndpointPage
@@ -13,31 +13,37 @@ def init_logger():
 
 @pytest.fixture(scope="session")
 def browser():
-    with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=False)
-        yield browser
-        browser.close()
+    pw = sync_playwright().start()
+    browser = pw.chromium.launch(headless=False)
+    yield browser
+    browser.close()
+    pw.stop()
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="session")
 def ui_factory(browser):
     return PageFactory.from_json(browser, "config.json")
 
 
 @pytest.fixture
 def page(ui_factory):
-    page_context = ui_factory.create_page()
-    yield page_context
-    page_context.close()
+    page_obj = ui_factory.create_page()
+    yield page_obj
+    page_obj.context.close()
 
 
 @pytest.fixture
 def login_page(page, ui_factory):
-    page_object = LoginPage(page, config = ui_factory.config)
-    page_object.open('/basic_auth', requires_auth=True)
-    return page_object
+    return ui_factory.open_page(
+        page=page,
+        page_class=LoginPage,
+        path_key="basic_auth",
+        requires_auth=True
+    )
 
 @pytest.fixture
 def endpoint_page(page, ui_factory, login_page) -> EndpointPage:
-    endpoint_page = EndpointPage(page, ui_factory.config)
-    return endpoint_page
+    return EndpointPage(
+        page, 
+        ui_factory.config
+    )
