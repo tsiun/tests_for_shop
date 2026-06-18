@@ -4,7 +4,7 @@ from ui.page_factory import PageFactory
 from logger import setup_logger
 from pages.login_page import LoginPage
 from pages.login_endpoint_page import EndpointPage
-from ui.page_actions import PageActions
+from pages.alert_page import AlertPage
 
 @pytest.fixture(scope="session", autouse=True)
 def init_logger():
@@ -46,4 +46,12 @@ def endpoint_page(page, ui_factory, login_page) -> EndpointPage:
     return EndpointPage(
         page, 
         ui_factory.config
+    )
+
+@pytest.fixture
+def alert_page(page, ui_factory) -> AlertPage:
+    return ui_factory.open_page(
+        page=page,
+        page_class=AlertPage,
+        path_key="javascript_alerts"
     )
