@@ -21,6 +21,12 @@ class WebElement:
 
     def __str__(self) -> str:
         return f"WebElement[{self.description}]"
+    
+    # def get_by_role(self) -> None:
+    #     logger.info(f"{self}: get role")
+    #     result = self.locator.get_by_role("button", name="Click")
+    #     logger.info(f"{self}: role = '{result}'")
+    #     return result
 
     def get_inner_text(self) -> str:
         logger.info(f"{self}: get inner text")
