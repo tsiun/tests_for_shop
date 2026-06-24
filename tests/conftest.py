@@ -5,6 +5,7 @@ from logger import setup_logger
 from pages.login_page import LoginPage
 from pages.login_endpoint_page import EndpointPage
 from pages.alert_page import AlertPage
+from pages.context_menu_page import ContextMenu
 
 @pytest.fixture(scope="session", autouse=True)
 def init_logger():
@@ -54,4 +55,12 @@ def alert_page(page, ui_factory) -> AlertPage:
         page=page,
         page_class=AlertPage,
         path_key="javascript_alerts"
+    )
+
+@pytest.fixture
+def context_menu_page(page, ui_factory) -> ContextMenu:
+    return ui_factory.open_page(
+        page=page,
+        page_class=ContextMenu,
+        path_key="context_menu"
     )
