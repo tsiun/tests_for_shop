@@ -19,4 +19,4 @@ class ContextMenu(BasePage):
 
     def make_right_click(self) -> str:
         
-        return self.page_actions.run_and_accept_alert(self.hot_spot_area.right_click())
+        return self.page_actions.run_and_accept_alert(self.hot_spot_area.right_click)
