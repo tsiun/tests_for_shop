@@ -29,7 +29,8 @@ class HorizontalSlider(BasePage):
         
         self.slider.focus()
         for _ in range(steps):
-            self.page.keyboard.press("ArrowRight")
+            self.slider.locator.press("ArrowRight")
+
 
         return expected_value
 
