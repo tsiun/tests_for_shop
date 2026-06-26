@@ -6,6 +6,7 @@ from pages.login_page import LoginPage
 from pages.login_endpoint_page import EndpointPage
 from pages.alert_page import AlertPage
 from pages.context_menu_page import ContextMenu
+from pages.horizontal_slider_page import HorizontalSlider
 
 @pytest.fixture(scope="session", autouse=True)
 def init_logger():
@@ -63,4 +64,12 @@ def context_menu_page(page, ui_factory) -> ContextMenu:
         page=page,
         page_class=ContextMenu,
         path_key="context_menu"
+    )
+
+@pytest.fixture
+def horizontal_slider_page(page, ui_factory) -> HorizontalSlider:
+    return ui_factory.open_page(
+        page=page,
+        page_class=HorizontalSlider,
+        path_key="horizontal_slider"
     )
