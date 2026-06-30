@@ -2,11 +2,11 @@ import pytest
 from playwright.sync_api import sync_playwright
 from ui.page_factory import PageFactory
 from logger import setup_logger
-from pages.login_page import LoginPage
-from pages.login_endpoint_page import EndpointPage
+from pages.base_auth_page import BaseAuth
 from pages.alert_page import AlertPage
 from pages.context_menu_page import ContextMenu
 from pages.horizontal_slider_page import HorizontalSlider
+from utils.url_utils import embed_credentials_in_url
 
 @pytest.fixture(scope="session", autouse=True)
 def init_logger():
@@ -33,43 +33,22 @@ def page(ui_factory):
     yield page_obj
     page_obj.context.close()
 
-
 @pytest.fixture
-def login_page(page, ui_factory):
-    return ui_factory.open_page(
-        page=page,
-        page_class=LoginPage,
-        path_key="basic_auth",
-        requires_auth=True
-    )
-
-@pytest.fixture
-def endpoint_page(page, ui_factory, login_page) -> EndpointPage:
-    return EndpointPage(
-        page, 
-        ui_factory.config
-    )
+def base_auth_page(page, ui_factory) -> BaseAuth:
+    ui_factory.navigate_to(page, "basic_auth", requires_auth=True)
+    return BaseAuth(page, ui_factory.config)
 
 @pytest.fixture
 def alert_page(page, ui_factory) -> AlertPage:
-    return ui_factory.open_page(
-        page=page,
-        page_class=AlertPage,
-        path_key="javascript_alerts"
-    )
+    ui_factory.navigate_to(page, "javascript_alerts")
+    return AlertPage(page, ui_factory.config)
 
 @pytest.fixture
 def context_menu_page(page, ui_factory) -> ContextMenu:
-    return ui_factory.open_page(
-        page=page,
-        page_class=ContextMenu,
-        path_key="context_menu"
-    )
+    ui_factory.navigate_to(page, "context_menu")
+    return ContextMenu(page, ui_factory.config)
 
 @pytest.fixture
 def horizontal_slider_page(page, ui_factory) -> HorizontalSlider:
-    return ui_factory.open_page(
-        page=page,
-        page_class=HorizontalSlider,
-        path_key="horizontal_slider"
-    )
+    ui_factory.navigate_to(page, "horizontal_slider")
+    return HorizontalSlider(page, ui_factory.config)
