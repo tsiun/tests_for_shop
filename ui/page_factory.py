@@ -85,8 +85,7 @@ class PageFactory:
 
         return context
     
-    def open_page(self, page: Page, page_class, path_key: str, requires_auth: bool=False):
-
+    def navigate_to(self, page: Page, path_key: str, requires_auth: bool=False) -> None:
         actions = PageActions(page)
 
         base_url = self.config["base_url"]
@@ -102,10 +101,6 @@ class PageFactory:
             )
 
         actions.goto(target_url)
-
-        return page_class(page, self.config)
-
-
 
     @staticmethod
     def _handle_route(route) -> None:
