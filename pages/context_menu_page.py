@@ -6,6 +6,7 @@ from ui.page_actions import PageActions
 
 logger = setup_logger(__name__)
 
+
 class ContextMenu(BasePage):
     def __init__(self, page: Page, config: dict):
         super().__init__(page, config)
@@ -14,11 +15,8 @@ class ContextMenu(BasePage):
             self.page.locator("#hot-spot"),
             description="Context menu page -> Hot spot area"
         )
-        
-
 
     def make_right_click(self) -> str:
-        
         return self.page_actions.run_and_accept_alert(
             lambda: self.hot_spot_area.right_click()
         )
