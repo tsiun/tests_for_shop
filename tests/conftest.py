@@ -8,6 +8,8 @@ from pages.context_menu_page import ContextMenu
 from pages.horizontal_slider_page import HorizontalSlider
 from utils.url_utils import embed_credentials_in_url
 from pages.hovers_page import HoversPage
+from pages.windows_page import WindowsPage
+from pages.windows_second_page import WindowsSecondPage
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -61,6 +63,12 @@ def horizontal_slider_page(page, ui_factory) -> HorizontalSlider:
 
 
 @pytest.fixture
-def hovers_page(page, ui_factory) -> "HoversPage":
+def hovers_page(page, ui_factory) -> HoversPage:
     ui_factory.navigate_to(page, "hovers")
     return HoversPage(page, ui_factory.config)
+
+
+@pytest.fixture
+def windows_page(page, ui_factory) -> WindowsPage:
+    ui_factory.navigate_to(page, "windows")
+    return WindowsPage(page, ui_factory.config)
