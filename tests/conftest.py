@@ -9,7 +9,7 @@ from pages.horizontal_slider_page import HorizontalSlider
 from utils.url_utils import embed_credentials_in_url
 from pages.hovers_page import HoversPage
 from pages.windows_page import WindowsPage
-from pages.windows_second_page import WindowsSecondPage
+from pages.nested_frames_page import NestedFrames
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -72,3 +72,9 @@ def hovers_page(page, ui_factory) -> HoversPage:
 def windows_page(page, ui_factory) -> WindowsPage:
     ui_factory.navigate_to(page, "windows")
     return WindowsPage(page, ui_factory.config)
+
+
+@pytest.fixture
+def nested_frames_page(page, ui_factory) -> NestedFrames:
+    ui_factory.navigate_to(page, "nested_frames")
+    return NestedFrames(page, ui_factory.config)
