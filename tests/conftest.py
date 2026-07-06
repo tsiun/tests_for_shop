@@ -2,7 +2,7 @@ import pytest
 from playwright.sync_api import sync_playwright
 from ui.page_factory import PageFactory
 from logger import setup_logger
-from pages.base_auth_page import BaseAuth
+from pages.base_auth_page import BaseAuthPage
 from pages.alert_page import AlertPage
 from pages.context_menu_page import ContextMenu
 from pages.horizontal_slider_page import HorizontalSlider
@@ -10,7 +10,7 @@ from utils.url_utils import embed_credentials_in_url
 from pages.hovers_page import HoversPage
 from pages.windows_page import WindowsPage
 from pages.nested_frames_page import NestedFrames
-from pages.dynamic_content_page import DynamicContent
+from pages.dynamic_content_page import DynamicContentPage
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -40,9 +40,9 @@ def page(ui_factory):
 
 
 @pytest.fixture
-def base_auth_page(page, ui_factory) -> BaseAuth:
+def base_auth_page(page, ui_factory) -> BaseAuthPage:
     ui_factory.navigate_to(page, "basic_auth", requires_auth=True)
-    return BaseAuth(page, ui_factory.config)
+    return BaseAuthPage(page, ui_factory.config)
 
 
 @pytest.fixture
@@ -82,6 +82,6 @@ def nested_frames_page(page, ui_factory) -> NestedFrames:
 
 
 @pytest.fixture
-def dynamic_content_page(page, ui_factory) -> DynamicContent:
+def dynamic_content_page(page, ui_factory) -> DynamicContentPage:
     ui_factory.navigate_to(page, "/dynamic_content")
-    return DynamicContent(page, ui_factory.config)
+    return DynamicContentPage(page, ui_factory.config)

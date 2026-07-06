@@ -2,7 +2,8 @@ from playwright.sync_api import Page
 from pages.base_page import BasePage
 from ui.web_element import WebElement
 
-class BaseAuth(BasePage):
+
+class BaseAuthPage(BasePage):
     def __init__(self, page: Page, config: dict):
         super().__init__(page, config)
         self.success_message = WebElement(
@@ -12,6 +13,6 @@ class BaseAuth(BasePage):
 
     def get_success_message(self) -> str:
         return self.success_message.get_text_content().strip()
-    
+
     def is_success_message_visible(self) -> bool:
         return self.success_message.locator.is_visible()
