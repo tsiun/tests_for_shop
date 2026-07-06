@@ -7,7 +7,7 @@ from ui.page_actions import PageActions
 logger = setup_logger(__name__)
 
 
-class ContextMenu(BasePage):
+class ContextMenuPage(BasePage):
     def __init__(self, page: Page, config: dict):
         super().__init__(page, config)
         self.page_actions = PageActions(page)
