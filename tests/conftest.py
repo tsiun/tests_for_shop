@@ -83,5 +83,5 @@ def nested_frames_page(page, ui_factory) -> NestedFramesPage:
 
 @pytest.fixture
 def dynamic_content_page(page, ui_factory) -> DynamicContentPage:
-    ui_factory.navigate_to(page, "/dynamic_content")
+    ui_factory.navigate_to(page, "dynamic_content")
     return DynamicContentPage(page, ui_factory.config)
