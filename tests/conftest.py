@@ -10,6 +10,7 @@ from utils.url_utils import embed_credentials_in_url
 from pages.hovers_page import HoversPage
 from pages.windows_page import WindowsPage
 from pages.nested_frames_page import NestedFrames
+from pages.dynamic_content_page import DynamicContent
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -78,3 +79,9 @@ def windows_page(page, ui_factory) -> WindowsPage:
 def nested_frames_page(page, ui_factory) -> NestedFrames:
     ui_factory.navigate_to(page, "nested_frames")
     return NestedFrames(page, ui_factory.config)
+
+
+@pytest.fixture
+def dynamic_content_page(page, ui_factory) -> DynamicContent:
+    ui_factory.navigate_to(page, "/dynamic_content")
+    return DynamicContent(page, ui_factory.config)
