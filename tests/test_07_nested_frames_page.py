@@ -1,7 +1,7 @@
-from pages.nested_frames_page import NestedFrames
+from pages.nested_frames_page import NestedFramesPage
 
 
-def test_nested_frames(nested_frames_page: NestedFrames):
+def test_nested_frames(nested_frames_page: NestedFramesPage):
     actual_left = nested_frames_page.get_left_text()
     expected_left = "LEFT"
 

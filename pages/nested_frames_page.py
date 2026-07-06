@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from ui.web_element import WebElement
 
 
-class NestedFrames(BasePage):
+class NestedFramesPage(BasePage):
     def __init__(self, page: Page, config: dict):
         super().__init__(page, config)
         self.left_frame = WebElement(
