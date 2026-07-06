@@ -5,7 +5,7 @@ from logger import setup_logger
 from pages.base_auth_page import BaseAuthPage
 from pages.alert_page import AlertPage
 from pages.context_menu_page import ContextMenuPage
-from pages.horizontal_slider_page import HorizontalSlider
+from pages.horizontal_slider_page import HorizontalSliderPage
 from utils.url_utils import embed_credentials_in_url
 from pages.hovers_page import HoversPage
 from pages.windows_page import WindowsPage
@@ -58,9 +58,9 @@ def context_menu_page(page, ui_factory) -> ContextMenuPage:
 
 
 @pytest.fixture
-def horizontal_slider_page(page, ui_factory) -> HorizontalSlider:
+def horizontal_slider_page(page, ui_factory) -> HorizontalSliderPage:
     ui_factory.navigate_to(page, "horizontal_slider")
-    return HorizontalSlider(page, ui_factory.config)
+    return HorizontalSliderPage(page, ui_factory.config)
 
 
 @pytest.fixture

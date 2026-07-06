@@ -1,8 +1,8 @@
-from pages.horizontal_slider_page import HorizontalSlider
+from pages.horizontal_slider_page import HorizontalSliderPage
 from utils.slider_utils import get_random_slider_value
 
 
-def test_horizontal_slider(horizontal_slider_page: HorizontalSlider) -> None:
+def test_horizontal_slider(horizontal_slider_page: HorizontalSliderPage) -> None:
     min_val = horizontal_slider_page.get_min_val()
     max_val = horizontal_slider_page.get_max_val()
     step = horizontal_slider_page.get_step()
