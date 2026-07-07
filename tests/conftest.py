@@ -11,6 +11,7 @@ from pages.hovers_page import HoversPage
 from pages.windows_page import WindowsPage
 from pages.nested_frames_page import NestedFramesPage
 from pages.dynamic_content_page import DynamicContentPage
+from pages.scroll_page import ScrollPage
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -85,3 +86,9 @@ def nested_frames_page(page, ui_factory) -> NestedFramesPage:
 def dynamic_content_page(page, ui_factory) -> DynamicContentPage:
     ui_factory.navigate_to(page, "dynamic_content")
     return DynamicContentPage(page, ui_factory.config)
+
+
+@pytest.fixture
+def scroll_page(page, ui_factory) -> ScrollPage:
+    ui_factory.navigate_to(page, "scroll")
+    return ScrollPage(page, ui_factory.config)
