@@ -19,6 +19,7 @@
     "hovers": "/hovers",
     "windows": "/windows",
     "nested_frames": "/nested_frames",
-    "dynamic_content": "/dynamic_content"
+    "dynamic_content": "/dynamic_content",
+    "scroll": "/infinite_scroll"
   }
 }
