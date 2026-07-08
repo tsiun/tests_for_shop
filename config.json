@@ -21,6 +21,7 @@
     "nested_frames": "/nested_frames",
     "dynamic_content": "/dynamic_content",
     "scroll": "/infinite_scroll",
-    "upload": "/upload"
+    "upload": "/upload",
+    "download": "/download"
   }
 }
