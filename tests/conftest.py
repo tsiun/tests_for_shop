@@ -13,6 +13,7 @@ from pages.nested_frames_page import NestedFramesPage
 from pages.dynamic_content_page import DynamicContentPage
 from pages.scroll_page import ScrollPage
 from pages.upload_image_page import UploadImagePage
+from pages. download_page import DownloadPage
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -99,3 +100,9 @@ def scroll_page(page, ui_factory) -> ScrollPage:
 def upload_image_page(page, ui_factory) -> UploadImagePage:
     ui_factory.navigate_to(page, "upload")
     return UploadImagePage(page, ui_factory.config)
+
+
+@pytest.fixture
+def download_page(page, ui_factory) -> DownloadPage:
+    ui_factory.navigate_to(page, "download")
+    return DownloadPage(page, ui_factory.config)
