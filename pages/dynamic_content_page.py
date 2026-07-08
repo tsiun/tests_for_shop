@@ -26,10 +26,6 @@ class DynamicContentPage(BasePage):
 
             self.page.reload()
 
-            # self.dynamic_image.wait_for(state="visible")
-            # self.page.wait_for_timeout(timeout=5000)
-            # self.dynamic_image.first().wait_for(state="visible")
-            # self.dynamic_image.wait_for_load_state()
             self.page.wait_for_load_state("load")
 
         return False
