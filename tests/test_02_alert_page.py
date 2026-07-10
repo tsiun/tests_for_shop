@@ -1,8 +1,10 @@
 from pages.alert_page import AlertPage
-from pages.alert_page import random_word
+from faker import Faker
 
 
 def test_alert_text(alert_page: AlertPage) -> None:
+    fake = Faker()
+    random_word = str(fake.word())
 
     actual_alert = alert_page.click_alert_and_accept()
     expected_alert = 'I am a JS Alert'
@@ -20,7 +22,7 @@ def test_alert_text(alert_page: AlertPage) -> None:
     expected_result_confirm = 'You clicked: Ok'
     assert result_confirm == expected_result_confirm, f"Expected text: '{expected_result_confirm}', but got: '{result_confirm}'"
 
-    actual_prompt = alert_page.click_prompt_and_input()
+    actual_prompt = alert_page.click_prompt_and_input(input_word=random_word)
     expected_prompt = 'I am a JS prompt'
     assert actual_prompt == expected_prompt, f"Expected text: '{expected_prompt}', but got: '{actual_prompt}'"
 
