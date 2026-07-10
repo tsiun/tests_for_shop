@@ -19,8 +19,8 @@ class UploadImagePage(BasePage):
             description="Uploaded file -> check file_name"
         )
 
-    def upload_file(self) -> None:
-        self.image_upload.set_input_files(file_path="utils/lego_batman.jpg")
+    def upload_file(self, file_path: str) -> None:
+        self.image_upload.set_input_files(file_path=file_path)
 
         self.submit_button.click()
 
