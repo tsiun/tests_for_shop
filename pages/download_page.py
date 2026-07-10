@@ -13,13 +13,13 @@ class DownloadPage(BasePage):
             description="Download page -> safe exact file"
         )
 
-    def get_exact_file_name(self, position: int = 3) -> str:
+    def get_exact_file_name(self, position: int) -> str:
         exact_file = self.file_names.nth(position - 1)
         file_name = exact_file.get_inner_text()
         return file_name
 
-    def download_exact_file(self) -> str:
-        file_name = self.get_exact_file_name()
+    def download_exact_file(self, position: int) -> str:
+        file_name = self.get_exact_file_name(position)
 
         with self.page.expect_download() as download_info:
             self.page.get_by_text(file_name).click()
