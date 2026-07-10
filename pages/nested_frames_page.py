@@ -7,23 +7,30 @@ class NestedFramesPage(BasePage):
     def __init__(self, page: Page, config: dict):
         super().__init__(page, config)
         self.left_frame = WebElement(
-            self.page.frame_locator(
-                "frame[name='frame-top']").frame_locator("frame[name='frame-left']").get_by_text("LEFT"),
+            self.page
+            .frame_locator("frame[name='frame-top']")
+            .frame_locator("frame[name='frame-left']")
+            .locator("body"),
             description="Frames page -> Left frame",
         )
         self.right_frame = WebElement(
-            self.page.frame_locator(
-                "frame[name='frame-top']").frame_locator("frame[name='frame-right']").get_by_text("RIGHT"),
+            self.page
+            .frame_locator("frame[name='frame-top']")
+            .frame_locator("frame[name='frame-right']")
+            .locator("body"),
             description="Frames page -> Right frame",
         )
         self.bottom_frame = WebElement(
-            self.page.frame_locator(
-                "frame[name='frame-bottom']").get_by_text("BOTTOM"),
+            self.page
+            .frame_locator("frame[name='frame-bottom']")
+            .locator("body"),
             description="Frames page -> Bottom frame",
         )
         self.middle_frame = WebElement(
-            self.page.frame_locator(
-                "frame[name='frame-top']").frame_locator("frame[name='frame-middle']").get_by_text("MIDDLE"),
+            self.page
+            .frame_locator("frame[name='frame-top']")
+            .frame_locator("frame[name='frame-middle']")
+            .locator("#content"),
             description="Frames page -> Middle frame",
         )
 
