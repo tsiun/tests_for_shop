@@ -13,7 +13,7 @@ class WebElement:
             self,
             locator: Locator,
             description: str,
-            page: Page | None =None,
+            page: Page | None = None,
     ) -> None:
         self.page = page
         self.locator = locator
@@ -71,3 +71,7 @@ class WebElement:
     def set_input_files(self, file_path: Path) -> None:
         logger.info(f"{self}: set input files '{file_path}'")
         self.locator.set_input_files(file_path)
+
+    def wait_for(self, state: str, timeout: int) -> None:
+        logger.info(f"{self}: wait for element load")
+        self.locator.wait_for()
