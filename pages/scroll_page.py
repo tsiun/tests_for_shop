@@ -23,4 +23,4 @@ class ScrollPage(BasePage):
 
             current_paragraph.scroll_into_view_if_needed()
 
-            self.page.wait_for_load_state("load")
+            self.page.wait_for_load_state("networkidle")
