@@ -19,8 +19,9 @@ class ScrollPage(BasePage):
 
     def scroll_down_by_paragraphs(self, count: int) -> None:
         while self.get_paragraphs_count() < count:
+            current_count = self.get_paragraphs_count()
             current_paragraph = self.dynamic_paragraphs.last()
 
             current_paragraph.scroll_into_view_if_needed()
 
-            self.page.wait_for_load_state("networkidle")
+            self.dynamic_paragraphs.nth(current_count).is_visible()
