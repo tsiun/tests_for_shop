@@ -11,18 +11,16 @@ class ScrollPage(BasePage):
         self.dynamic_paragraphs = MultiWebElement(
             page=self.page,
             locator=self.page.locator("#content .jscroll-added"),
-            description="Scroll page -> dynamic paragraphs"
+            description="Scroll page -> dynamic paragraphs",
         )
 
     def get_paragraphs_count(self) -> int:
         return self.dynamic_paragraphs.count()
 
     def scroll_down_by_paragraphs(self, count: int) -> None:
-        for i in range(count):
-            self.page.mouse.wheel(delta_x=0, delta_y=10000)
-
-            current_paragraph = self.dynamic_paragraphs.nth(i)
+        while self.get_paragraphs_count() < count:
+            current_paragraph = self.dynamic_paragraphs.last()
 
             current_paragraph.scroll_into_view_if_needed()
 
-            current_paragraph.wait_for(state='visible', timeout=5000)
+            self.page.wait_for_load_state("load")
