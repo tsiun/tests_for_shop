@@ -41,18 +41,18 @@ class PageActions:
         return self._handle_dialog(action, mode="dismiss")
 
     def run_and_accept_prompt(
-            self,
-            action: Callable[[], None],
-            prompt_text: str,
+        self,
+        action: Callable[[], None],
+        prompt_text: str,
     ) -> str:
         logger.info("PageActions: accept prompt")
         return self._handle_dialog(action, mode="accept", prompt_text=prompt_text)
 
     def _handle_dialog(
-            self,
-            action: Callable[[], None],
-            mode: str,
-            prompt_text: str | None = None,
+        self,
+        action: Callable[[], None],
+        mode: str,
+        prompt_text: str | None = None,
     ) -> str:
         logger.info("PageActions: expect dialog")
         message = ""
