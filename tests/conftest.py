@@ -13,6 +13,7 @@ from pages.dynamic_content_page import DynamicContentPage
 from pages.scroll_page import ScrollPage
 from pages.upload_image_page import UploadImagePage
 from pages.download_page import DownloadPage
+import json
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -21,17 +22,23 @@ def init_logger():
 
 
 @pytest.fixture(scope="session")
-def browser():
+def config():
+    with open("config.json", encoding="utf-8") as config_file:
+        return json.load(config_file)
+
+
+@pytest.fixture(scope="session")
+def browser(config):
     pw = sync_playwright().start()
-    browser = pw.chromium.launch(headless=True)
+    browser = pw.chromium.launch(headless=config.get("headless", True))
     yield browser
     browser.close()
     pw.stop()
 
 
 @pytest.fixture(scope="session")
-def ui_factory(browser):
-    return PageFactory.from_json(browser, "config.json")
+def ui_factory(browser, config):
+    return PageFactory(browser, config)
 
 
 @pytest.fixture
