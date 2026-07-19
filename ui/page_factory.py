@@ -8,6 +8,7 @@ from playwright.sync_api import Browser, BrowserContext, Page
 
 logger = setup_logger(__name__)
 
+
 class PageFactory:
     DEFAULT_USER_AGENT = "Steam3TestRunner/1.0"
     DEFAULT_VIEWPORT = {"width": 1440, "height": 900}
@@ -25,7 +26,7 @@ class PageFactory:
         self.config = config
 
     @classmethod
-    def from_json(cls, browser: Browser, file_path: str) -> PageFactory:
+    def from_json(cls, browser: Browser, file_path: str) -> "PageFactory":
         with open(file_path, encoding="utf-8") as config_file:
             config = json.load(config_file)
         return cls(browser, config)
@@ -33,7 +34,9 @@ class PageFactory:
     def create_page(self) -> Page:
         context = self._create_context()
         page = context.new_page()
-        page.set_default_timeout(self.config.get("default_timeout_ms", self.DEFAULT_TIMEOUT_MS))
+        page.set_default_timeout(
+            self.config.get("default_timeout_ms", self.DEFAULT_TIMEOUT_MS)
+        )
         page.set_default_navigation_timeout(
             self.config.get(
                 "navigation_timeout_ms",
@@ -58,11 +61,7 @@ class PageFactory:
             extra_http_headers={
                 "X-Test-Run": "true",
                 "X-Source": "ui-e2e",
-                **(
-                    {"Authorization": f"Bearer {auth_token}"}
-                    if auth_token
-                    else {}
-                ),
+                **({"Authorization": f"Bearer {auth_token}"} if auth_token else {}),
             },
         )
 
@@ -84,8 +83,10 @@ class PageFactory:
             context.route("**/*", self._handle_route)
 
         return context
-    
-    def navigate_to(self, page: Page, path_key: str, requires_auth: bool=False) -> None:
+
+    def navigate_to(
+        self, page: Page, path_key: str, requires_auth: bool = False
+    ) -> None:
         actions = PageActions(page)
 
         base_url = self.config["base_url"]
@@ -95,9 +96,7 @@ class PageFactory:
         if requires_auth:
             auth = self.config["basic_auth"]
             target_url = embed_credentials_in_url(
-                target_url, 
-                auth["username"], 
-                auth["password"]
+                target_url, auth["username"], auth["password"]
             )
 
         actions.goto(target_url)
