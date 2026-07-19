@@ -6,14 +6,13 @@ from pages.base_auth_page import BaseAuthPage
 from pages.alert_page import AlertPage
 from pages.context_menu_page import ContextMenuPage
 from pages.horizontal_slider_page import HorizontalSliderPage
-from utils.url_utils import embed_credentials_in_url
 from pages.hovers_page import HoversPage
 from pages.windows_page import WindowsPage
 from pages.nested_frames_page import NestedFramesPage
 from pages.dynamic_content_page import DynamicContentPage
 from pages.scroll_page import ScrollPage
 from pages.upload_image_page import UploadImagePage
-from pages. download_page import DownloadPage
+from pages.download_page import DownloadPage
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -24,7 +23,7 @@ def init_logger():
 @pytest.fixture(scope="session")
 def browser():
     pw = sync_playwright().start()
-    browser = pw.chromium.launch(headless=False)
+    browser = pw.chromium.launch(headless=True)
     yield browser
     browser.close()
     pw.stop()
