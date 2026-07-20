@@ -1,0 +1,27 @@
+{
+  "base_url": "https://the-internet.herokuapp.com",
+  "basic_auth": {
+    "username": "admin",
+    "password": "admin"
+  },
+  "viewport": { "width": 1440, "height": 900 },
+  "locale": "en-US",
+  "timezone_id": "Europe/Moscow",
+  "default_timeout_ms": 10000,
+  "navigation_timeout_ms": 35000,
+  "block_analytics": true,
+
+  "pages": {
+    "basic_auth": "/basic_auth",
+    "javascript_alerts": "/javascript_alerts",
+    "context_menu": "/context_menu",
+    "horizontal_slider": "/horizontal_slider",
+    "hovers": "/hovers",
+    "windows": "/windows",
+    "nested_frames": "/nested_frames",
+    "dynamic_content": "/dynamic_content",
+    "scroll": "/infinite_scroll",
+    "upload": "/upload",
+    "download": "/download"
+  }
+}
